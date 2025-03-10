@@ -19,7 +19,8 @@ function Intro() {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/create_user", {
+
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/create_user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name }),

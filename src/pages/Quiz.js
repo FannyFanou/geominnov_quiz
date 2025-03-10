@@ -68,7 +68,7 @@ function Quiz() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/assign_questions/${userId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/assign_questions/${userId}`);
         const data = await response.json();
         console.log("📥 Données reçues :", data);
 
@@ -143,7 +143,7 @@ function Quiz() {
     }
   
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/correct_answer", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/correct_answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, question_id: questionId, choice_id: choiceId }),
@@ -179,7 +179,7 @@ function Quiz() {
     }
   
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/correct_answer", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/correct_answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, question_id: questionId, user_answer: userOpenAnswer }),
