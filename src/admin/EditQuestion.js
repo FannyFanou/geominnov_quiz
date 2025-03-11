@@ -35,7 +35,7 @@ function EditQuestion() {
     } catch (error) {
       setError(error.message);
     }
-  };
+  }; 
 
   return (
     <div className="p-6 bg-primary-light min-h-screen flex justify-center items-center">

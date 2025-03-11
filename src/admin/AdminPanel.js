@@ -21,7 +21,7 @@ function AdminPanel() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/admin/questions");
+      const response = await fetch("https://geominj.cluster028.hosting.ovh.net/api/admin/questions");
       const data = await response.json();
       setQuestions(data.data);
     } catch (error) {
@@ -39,7 +39,7 @@ function AdminPanel() {
     if (!window.confirm("Voulez-vous vraiment supprimer cette question ?")) return;
 
     try {
-      await fetch(`http://127.0.0.1:8000/api/admin/delete-question/${id}`, { method: "DELETE" });
+      await fetch(`https://geominj.cluster028.hosting.ovh.net/api/admin/delete-question/${id}`, { method: "DELETE" });
       setQuestions(questions.filter((q) => q.id !== id));
     } catch (error) {
       setError("Erreur lors de la suppression de la question");
