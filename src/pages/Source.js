@@ -8,7 +8,7 @@ function Sources() {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-primary-light p-6 text-center">
-      <h1 className="text-3xl font-bold text-primary-dark mb-6">📚 Sources des Questions</h1>
+      <h1 className="text-3xl font-bold text-primary-dark mb-6">Sources des réponses</h1>
 
       {sources.length > 0 ? (
         <div className="w-full max-w-2xl space-y-4">

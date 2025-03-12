@@ -12,6 +12,7 @@ import EditQuestion from "./admin/EditQuestion";
 import ParticipantsList from "./admin/Participants";
 import AdminLogin from "./admin/AdminLogin";
 import Sources from "./pages/Source";
+import './index.css'; 
 
 function App() {
   return (
