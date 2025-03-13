@@ -5,6 +5,7 @@ function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId || localStorage.getItem("userId");
+  console.log(userId);
   const [timeLeft, setTimeLeft] = useState(20); // Temps limite en secondes
   const [isTimerActive, setIsTimerActive] = useState(true);
 
@@ -66,31 +67,30 @@ function Quiz() {
   const [userOpenAnswer, setUserOpenAnswer] = useState("");
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/assign_questions/${userId}`);
-        const data = await response.json();
-        console.log("📥 Données reçues :", data);
-
-        setQuestions(data.questions);
-        localStorage.setItem("quizQuestions", JSON.stringify(data.questions));
-      } catch (error) {
-        console.error("❌ Erreur :", error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     const savedQuestions = localStorage.getItem("quizQuestions");
     if (savedQuestions) {
       console.log("📥 Chargement des questions depuis localStorage !");
-      setQuestions(JSON.parse(savedQuestions));
+      setQuestions(JSON.parse(savedQuestions)); // Récupère les questions stockées
       setLoading(false);
-    } else if (userId) {
-      fetchQuestions();
-    }
-  }, [userId]);
+    } else {
+      const fetchQuestions = async () => {
+        try {
 
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/assign_questions`);
+          const data = await response.json();
+          setQuestions(data.questions);
+          localStorage.setItem("quizQuestions", JSON.stringify(data.questions)); // Stocke les questions pour plus tard
+        } catch (error) {
+          console.error("❌ Erreur :", error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchQuestions(); // Si elles ne sont pas en cache, fais la requête
+    }
+  }, []); // Ce useEffect s'exécute une seule fois lors du chargement du composant Quiz
+  
   useEffect(() => {
     const savedIndex = localStorage.getItem("savedQuestionIndex");
 
@@ -143,7 +143,10 @@ function Quiz() {
     }
   
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/correct_answer`, {
+      console.log({ userId, questionId, choiceId });
+
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/correct_answer`, {
+        //const response = await fetch(`http://127.0.0.1:8000/api/correct_answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, question_id: questionId, choice_id: choiceId }),
@@ -180,6 +183,7 @@ function Quiz() {
   
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/correct_answer`, {
+        //const response = await fetch(`http://127.0.0.1:8000/api/correct_answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, question_id: questionId, user_answer: userOpenAnswer }),

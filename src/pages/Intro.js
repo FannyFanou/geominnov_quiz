@@ -20,7 +20,10 @@ function Intro() {
 
     try {
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/create_user`, {
+
+       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/create_user`, {
+     // const response = await fetch(`http://127.0.0.1:8000/api/create_user`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name }),
@@ -32,6 +35,7 @@ function Intro() {
       }
 
       localStorage.setItem("userId", data.user.id);
+      console.log(data.user.id)
 
       navigate("/quiz", { state: { userId: data.user.id } });
     } catch (err) {

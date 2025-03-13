@@ -5,7 +5,7 @@ function ThankYou() {
     <div className="h-screen flex flex-col items-center justify-center bg-primary-light p-6 text-center">
       {/* Illustration */}
       <img
-        src="/assets/intro-illustration.png"
+        src="/assets/img.jpeg"
         alt="Logo Entreprise"
         className="w-48 mb-6 drop-shadow-lg"
       />
