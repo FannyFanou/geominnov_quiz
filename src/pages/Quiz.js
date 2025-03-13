@@ -227,7 +227,7 @@ function Quiz() {
       console.log("🏁 Fin du quiz ! Nettoyage du cache et redirection...");
   
       // 🔥 Suppression du cache AVANT la redirection
-      localStorage.clear();
+      localStorage.removeItem("savedQuestionIndex"); // Ou d'autres clés
   
       // 🚀 Redirection vers les résultats
       navigate("/results", { state: { score, sources: questions.map(q => q.source).filter(Boolean) } });
