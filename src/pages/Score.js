@@ -8,6 +8,7 @@ function Results() {
 
   // Récupération correcte de userId (depuis localStorage)
   const userId = localStorage.getItem("userId");
+  console.log(userId);
 
   const [leaderboard, setLeaderboard] = useState([]);
   const [userScore, setUserScore] = useState(0); // Score de l'utilisateur
