@@ -8,7 +8,7 @@ function ParticipantsList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/score")
+    fetch(`${process.env.REACT_APP_API_URL}/api/score`)
       .then((response) => response.json())
       .then((data) => {
         setParticipants(data.message);

@@ -35,7 +35,8 @@ function QuestionForm() {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/admin/create_question", {
+
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/create_question)`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
