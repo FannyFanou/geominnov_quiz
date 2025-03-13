@@ -220,14 +220,17 @@ function Quiz() {
         navigate("/email", { state: { score, resumedIndex: 4 } });
       } else {
         setCurrentQuestionIndex(nextIndex);
-        setTimeLeft(20); // 🔄 Réinitialise bien le timer ici
-        setIsTimerActive(true); // ✅ Redémarre le timer
+        setTimeLeft(20); // 🔄 Réinitialisation du timer
+        setIsTimerActive(true);
       }
     } else {
-      console.log("🏁 Fin du quiz ! Redirection vers les résultats...");
-      // Récupérer les sources des questions
-    const sources = questions.map(q => q.source).filter(Boolean);
-      navigate("/results", { state: { score, sources } });
+      console.log("🏁 Fin du quiz ! Nettoyage du cache et redirection...");
+  
+      // 🔥 Suppression du cache AVANT la redirection
+      localStorage.clear();
+  
+      // 🚀 Redirection vers les résultats
+      navigate("/results", { state: { score, sources: questions.map(q => q.source).filter(Boolean) } });
     }
   };
   
