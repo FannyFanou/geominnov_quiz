@@ -58,7 +58,7 @@ function App() {
         <Route path="/edit-question/:id" element={<EditQuestion />} />
         <Route path="/participants" element={<ParticipantsList />} />
 
-        <Route path="/login" element={<AdminLogin />} />
+        <Route path="login" element={<AdminLogin />} />
       </Routes>
     </Router>
   );

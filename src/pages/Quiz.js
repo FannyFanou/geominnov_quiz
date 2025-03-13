@@ -135,12 +135,12 @@ function Quiz() {
       return;
     }
   
-    // Vérifier si la question a déjà une réponse stockée
+    // // Vérifier si la question a déjà une réponse stockée
     const savedAnswers = JSON.parse(localStorage.getItem("userAnswers")) || {};
     if (savedAnswers[questionId]) {
       setFeedback("⚠️ Vous avez déjà répondu à cette question !");
       return;
-    }
+   }
   
     try {
       console.log({ userId, questionId, choiceId });
@@ -196,9 +196,9 @@ function Quiz() {
         setScore((prevScore) => prevScore + 1);
       }
   
-      // Sauvegarder la réponse pour empêcher de répondre à nouveau
-      savedAnswers[questionId] = userOpenAnswer;
-      localStorage.setItem("userAnswers", JSON.stringify(savedAnswers));
+      // // Sauvegarder la réponse pour empêcher de répondre à nouveau
+      // savedAnswers[questionId] = userOpenAnswer;
+      // localStorage.setItem("userAnswers", JSON.stringify(savedAnswers));
   
     } catch (error) {
       console.error("❌ Erreur d'envoi :", error.message);
