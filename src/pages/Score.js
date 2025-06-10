@@ -77,25 +77,25 @@ function Results() {
       });
   }, [userId]);
 
-//   useEffect(() => {
-//     if (userId) {
-//       fetch(`http://127.0.0.1:8000/api/send-email/${userId}`, { 
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       })
-//         .then((response) => response.json())
-//         .then((data) => {
-//           if (data.message) {
-//             console.log("✅ E-mail envoyé avec succès !");
-//           } else {
-//             console.error("❌ Erreur lors de l'envoi de l'e-mail :", data.error);
-//           }
-//         })
-//         .catch((error) => console.error("❌ Erreur réseau :", error));
-//     }
-//   }, [userId]);
+  useEffect(() => {
+    if (userId) {
+      fetch(`${process.env.REACT_APP_API_URL}/api/send-email/${userId}`, { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            console.log("✅ E-mail envoyé avec succès !");
+          } else {
+            console.error("❌ Erreur lors de l'envoi de l'e-mail :", data.error);
+          }
+        })
+        .catch((error) => console.error("❌ Erreur réseau :", error));
+    }
+  }, [userId]);
 
   const getMessage = () => {
     if (userScore === 5) return "Félicitations ! Vous avez relevé le défi, si vous êtes prêts à relever d’autres défis, faites appel à GEOMINNOV";

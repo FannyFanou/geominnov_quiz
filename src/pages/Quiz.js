@@ -95,11 +95,11 @@ function Quiz() {
     const savedIndex = localStorage.getItem("savedQuestionIndex");
 
     if (fromAlmostThere && savedIndex) {
-      console.log("✅ Retour au quiz après AlmostThere !");
+      console.log("Retour au quiz après AlmostThere !");
       setCurrentQuestionIndex(parseInt(savedIndex, 10));
       localStorage.removeItem("savedQuestionIndex");
     } else if (location.state?.resumedIndex !== undefined) {
-      console.log("🎯 Reprise après EmailForm !");
+      console.log("Reprise après EmailForm !");
       setCurrentQuestionIndex(location.state.resumedIndex);
     }
   }, []);
@@ -131,14 +131,14 @@ function Quiz() {
     const questionId = currentQuestion?.id;
   
     if (!userId || !questionId || !choiceId) {
-      console.error("❌ Erreur : Infos manquantes !");
+      console.error(" Erreur : Infos manquantes !");
       return;
     }
   
     // // Vérifier si la question a déjà une réponse stockée
     const savedAnswers = JSON.parse(localStorage.getItem("userAnswers")) || {};
     if (savedAnswers[questionId]) {
-      setFeedback("⚠️ Vous avez déjà répondu à cette question !");
+      setFeedback("Vous avez déjà répondu à cette question !");
       return;
    }
   
@@ -164,7 +164,7 @@ function Quiz() {
       localStorage.setItem("userAnswers", JSON.stringify(savedAnswers));
   
     } catch (error) {
-      console.error("❌ Erreur d'envoi :", error.message);
+      console.error("Erreur d'envoi :", error.message);
     }
   };
   
@@ -177,7 +177,7 @@ function Quiz() {
     // Vérifier si l'utilisateur a déjà répondu à cette question
     const savedAnswers = JSON.parse(localStorage.getItem("userAnswers")) || {};
     if (savedAnswers[questionId]) {
-      setFeedback("⚠️ Vous avez déjà répondu à cette question !");
+      setFeedback("Vous avez déjà répondu à cette question !");
       return;
     }
   
@@ -201,7 +201,7 @@ function Quiz() {
       // localStorage.setItem("userAnswers", JSON.stringify(savedAnswers));
   
     } catch (error) {
-      console.error("❌ Erreur d'envoi :", error.message);
+      console.error("Erreur d'envoi :", error.message);
     }
   };
   
@@ -211,18 +211,24 @@ function Quiz() {
     setUserOpenAnswer("");
   
     const nextIndex = currentQuestionIndex + 1;
+    
   
     if (nextIndex < questions.length) {
-      if (nextIndex === 3) {
-        localStorage.setItem("savedQuestionIndex", 3);
-        navigate("/almost-there", { state: { score, resumedIndex: 3 } });
-      } else if (nextIndex === 4) {
-        navigate("/email", { state: { score, resumedIndex: 4 } });
-      } else {
-        setCurrentQuestionIndex(nextIndex);
+      if (nextIndex === 3 && !location.state?.fromAlmostThere) {
+      // Stocker où on en est
+      localStorage.setItem("savedQuestionIndex", nextIndex);
+      localStorage.setItem("fromAlmostThere", "true");
+      
+      // Rediriger vers la page "almost-there"
+      navigate("/almost-there", { state: { score, resumedIndex: nextIndex } });
+    }else{
+              setCurrentQuestionIndex(nextIndex);
         setTimeLeft(20); // 🔄 Réinitialisation du timer
         setIsTimerActive(true);
-      }
+
+    }
+      
+      
     } else {
       console.log("🏁 Fin du quiz ! Nettoyage du cache et redirection...");
   

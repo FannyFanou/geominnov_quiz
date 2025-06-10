@@ -37,7 +37,7 @@ function Intro() {
       localStorage.setItem("userId", data.user.id);
       console.log(data.user.id)
 
-      navigate("/quiz", { state: { userId: data.user.id } });
+     navigate("/email", { state: { userId: data.user.id, fromIntro: true } });
     } catch (err) {
       setError("Impossible d'enregistrer le nom.");
     } finally {

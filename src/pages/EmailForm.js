@@ -62,7 +62,8 @@ function EmailForm() {
       }
 
       // 🔄 Redirection vers le Quiz
-      navigate("/quiz", { state: { fromEmailForm: true, userId: data.user_id || userId, resumedIndex: 4 } });
+      navigate("/quiz", { state: { fromEmailForm: true, userId: data.user_id || userId
+      } });
 
     } catch (err) {
       console.error("❌ Erreur :", err.message);

@@ -10,7 +10,7 @@ function EditQuestion() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/admin/update-question/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/admin/update-question/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setQuestion(data.question_text);
@@ -23,7 +23,7 @@ function EditQuestion() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/questions/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/questions/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question, source }),
